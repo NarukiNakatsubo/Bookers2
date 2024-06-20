@@ -1,0 +1,15 @@
+<h1>Users</h1>
+
+<h4>image</h4>
+<h4>name</h4>
+
+<ul>
+  <% @users.each do |user| %>
+    <li><%= image_tag user.get_image %></li>
+    <li><%= user.name %></li>
+    <li><%= link_to "Show", user_path(user.id) %></li>
+  <% end %>
+</ul>
+
+
+<%= render 'list', book: @book, user: @user %>

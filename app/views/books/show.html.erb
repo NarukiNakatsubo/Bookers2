@@ -1,0 +1,14 @@
+<h1>Book detail</h1>
+
+<ul>
+  <li><%= link_to image_tag(@book_show.user.get_image), user_path(@book_show.user) %></li>
+  <li><%= link_to @book_show.title, book_path(@book_show.id) %></li>
+  <li><%= @book_show.body %></li>
+  <% if @user.id == @book_show.user.id %>
+    <%= button_to 'Edit', edit_book_path(@book_show.id), method: :get %>
+    <%= button_to 'Destroy', book_path(@book_show.id), method: :delete %>
+  <% end %>
+  <li><%= link_to @book_show.user.name, user_path(@book_show.id) %></li>
+</ul>
+
+<%= render 'users/list', book: @book, user: @user %>

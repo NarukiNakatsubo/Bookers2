@@ -1,0 +1,16 @@
+<%= render 'list', book: @book, user: @user %>
+
+<h1>Books</h1>
+
+<h4>Title</h4>
+<h4>Opinion</h4>
+
+<ul>
+  <% @books.each do |book| %>
+    <li><%= link_to(image_tag(book.user.get_image), user_path(book.user)) %></li>
+    <li><%= link_to book.title, book_path(book.id) %></li>
+    <li><%= book.body %></li>
+  <% end %>
+</ul>
+
+
