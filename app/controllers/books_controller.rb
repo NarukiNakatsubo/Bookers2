@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   
+  before_action :authenticate_user!
   # アクセス制限
   before_action :is_matching_login_user, only: [:edit, :update]
   
@@ -32,9 +33,8 @@ class BooksController < ApplicationController
   
   def show
    @book = Book.new
-   user_id = current_user.id
-   @user = User.find(user_id)
    @book_show = Book.find(params[:id])
+   @user = @book_show.user
   end
   
   def edit
@@ -69,8 +69,8 @@ class BooksController < ApplicationController
   end     
   
   def is_matching_login_user
-    user = User.find(params[:id])
-    unless user.id == current_user.id
+    @book = Book.find(params[:id])
+    unless @book.user_id == current_user.id
       redirect_to books_path
     end
   end

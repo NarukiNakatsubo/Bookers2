@@ -13,6 +13,15 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"; 
 
+// document.addEventListener('turbolinks:load', () => {
+//   const toggler = document.querySelector('.navbar-toggler');
+//   const collapse = document.querySelector('.navbar-collapse');
+  
+//   toggler.addEventListener('click', () => {
+//     collapse.classList.toggle('show');
+//   });
+// });
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

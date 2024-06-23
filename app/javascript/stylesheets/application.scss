@@ -1,1 +1,5 @@
-@import '~bootstrap/scss/bootstrap';
+@use '~bootstrap/scss/bootstrap';
+
+.navbar {
+    background-color: black;
+}

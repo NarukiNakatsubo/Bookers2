@@ -6,19 +6,33 @@
   </ul>
 <% end %>
 
-<h1>User info</h1>
-
-<%= form_with model: @user do |f| %>
-
-  <h4>Name</h4>
-  <%= f.text_field :name %>
-  
-  <h4>Image</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  
-  <h4>Introduction</h4>
-  <%= f.text_area :introduction %>
-  
-  <%= f.submit 'Update User' %>
-  
-<% end %>
+<div class="container">
+  <div class="row">
+      <div class="mx-auto">
+        <div style="margin-top: 10px;">
+          <h1>User info</h1>
+          
+          <%= form_with model: @user do |f| %>
+          
+            <div style="margin-bottom: 10px;">
+              <div>Name</div>
+              <%= f.text_field :name, style: "width: 400px;" %>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+              <div>Image</div>
+              <%= f.file_field :profile_image, accept: "image/*" %>
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+              <div>Introduction</div>
+              <%= f.text_area :introduction, style: "width: 400px;" %>
+            </div>
+            
+            <%= f.submit 'Update User', class: "btn btn-primary text-white", style: "background-color: gray;" %>
+            
+          <% end %>
+        </div>
+      </div>
+  </div>
+</div>

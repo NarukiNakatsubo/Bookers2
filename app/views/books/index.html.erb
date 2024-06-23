@@ -1,16 +1,36 @@
-
-<h1>Books</h1>
-
-<h4>Title</h4>
-<h4>Opinion</h4>
-
-
-<ul>
-  <% @books_all.each do |book| %>
-    <li><%= link_to image_tag(book.user.get_image), user_path(book.id) %></li>
-    <li><%= link_to book.title, book_path(book.id) %></li>
-    <li><%= book.body %></li>
-  <% end %>
-</ul>
-
-<%= render 'users/list', book: @book, user: @user %>
+<div class="container">
+  <div class="row">
+    
+    <div class="col-md-3">
+      <%= render 'users/list', book: @book, user: @user %>
+    </div>
+    
+    <div class="col-md-8 offset-md-1">
+      <h1>Books</h1>
+      
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+            <% @books_all.each do |book| %>
+              <tr onmouseover="this.style.backgroundColor='lightgray'" onmouseout="this.style.backgroundColor='white'">
+                <td><%= link_to image_tag(book.user.get_image, size: "100x100"), user_path(book.id) %></td>
+                <td><%= link_to book.title, book_path(book.id) %></td>
+                <td><%= book.body %></td>
+              </tr>
+            <% end %>
+          </ul>
+        </tbody>
+      </table>
+      
+    </div>
+    
+    
+  </div>
+</div>

@@ -1,14 +1,38 @@
-<h1>Book detail</h1>
+<div style="margin-top: 20px;">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-3">
+        <%= render 'users/list', book: @book, user: @user %>
+      </div>
+      
+      <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+        
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to image_tag(@book_show.user.get_image, size: "100x100"), user_path(@book_show.user) %>
+                </br>
+                <%= link_to @book_show.user.name, user_path(@book_show.id) %>
+              </td>
+              <td><%= link_to @book_show.title, book_path(@book_show.id) %></td>
+              <td><%= @book_show.body %></td>
+              <% if current_user == @book_show.user %>
+                <td><%= link_to 'Edit', edit_book_path(@book_show), style: "background-color: green; color: white;", class: "btn btn-primary" %></td>
+                <td><%= link_to 'Destroy', book_path(@book_show), method: :delete, style: "background-color: red; color: white;", class: "btn btn-primary" %></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
 
-<ul>
-  <li><%= link_to image_tag(@book_show.user.get_image), user_path(@book_show.user) %></li>
-  <li><%= link_to @book_show.title, book_path(@book_show.id) %></li>
-  <li><%= @book_show.body %></li>
-  <% if @user.id == @book_show.user.id %>
-    <%= button_to 'Edit', edit_book_path(@book_show.id), method: :get %>
-    <%= button_to 'Destroy', book_path(@book_show.id), method: :delete %>
-  <% end %>
-  <li><%= link_to @book_show.user.name, user_path(@book_show.id) %></li>
-</ul>
+          
+      </div>
+      
+    </div>
+  </div>
+</div>
 
-<%= render 'users/list', book: @book, user: @user %>
+
+
