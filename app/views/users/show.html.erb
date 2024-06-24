@@ -14,6 +14,8 @@
               <th></th>
               <th>Title</th>
               <th>Opinion</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +24,20 @@
                 <td><%= link_to(image_tag(book.user.get_image, size: "100x100"), user_path(book.user)) %></td>
                 <td><%= link_to book.title, book_path(book.id) %></td>
                 <td><%= book.body %></td>
+                <% if book.favorited_by?(current_user) %>
+                  <td>
+                    <%= link_to book_favorite_path(book), method: :delete do %>
+                      <i class="fa-solid fa-heart" style="color: red;"></i><span class="heart-count"><%= book.favorites.count %></span>
+                    <% end %>
+                  </td>
+                <% else %>
+                  <td>
+                    <%= link_to book_favorite_path(book), method: :post do %>
+                      <i class="fa-solid fa-heart"></i><%= book.favorites.count %>
+                    <% end %>
+                  </td>
+                <% end %>   
+                <td>コメント数: <%= book.book_comments.count %></td>
               </tr>
             <% end %>
           </tbody>

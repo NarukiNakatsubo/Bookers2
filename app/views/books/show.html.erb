@@ -19,14 +19,47 @@
               </td>
               <td><%= link_to @book_show.title, book_path(@book_show.id) %></td>
               <td><%= @book_show.body %></td>
-              <% if current_user == @book_show.user %>
-                <td><%= link_to 'Edit', edit_book_path(@book_show), style: "background-color: green; color: white;", class: "btn btn-primary" %></td>
-                <td><%= link_to 'Destroy', book_path(@book_show), method: :delete, style: "background-color: red; color: white;", class: "btn btn-primary" %></td>
-              <% end %>
+              <!--<% if current_user == @book_show.user %>-->
+              <!--  <td><%= link_to 'Edit', edit_book_path(@book_show), style: "background-color: green; color: white;", class: "btn btn-primary" %></td>-->
+              <!--  <td><%= link_to 'Destroy', book_path(@book_show), method: :delete, style: "background-color: red; color: white;", class: "btn btn-primary" %></td>-->
+              <!--<% end %>-->
+              <% if @book_show.favorited_by?(current_user) %>
+                <td>
+                  <%= link_to book_favorite_path(@book_show), method: :delete do %>
+                    <i class="fa-solid fa-heart" style="color: red;"></i><span class="heart-count"><%= @book_show.favorites.count %></span>
+                  <% end %>
+                </td>
+                <% else %>
+                <td>
+                  <%= link_to book_favorite_path(@book_show), method: :post do %>
+                    <i class="fa-solid fa-heart"></i><%= @book_show.favorites.count %>
+                  <% end %>
+                </td>
+              <% end %>              
+              <td>コメント数：<%= @book_show.book_comments.count %></td>
             </tr>
           </tbody>
         </table>
-
+        
+        <div>
+          <% @book_show.book_comments.each do |book_comment| %>
+            <div>
+              <%= image_tag book_comment.user.get_image, size: "100x100" %>
+              <%= book_comment.user.name %>
+              <% if book_comment.user == current_user %>
+                <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, style: "background-color: red; color: white;", class: "btn btn-primary" %>
+              <% end %>
+            </div>
+            <%= link_to book_comment.user.name, user_path(book_comment.user) %> 
+            <% end %>
+        </div>
+        <div>
+          <%= form_with model: [@book_show, @book_comment] do |f| %>
+            <%= f.text_area :comment, rows: '5', style: "width: 700px;" %>
+            <div></div>
+            <%= f.submit "送信" %>
+          <% end %>
+        </div>
           
       </div>
       
