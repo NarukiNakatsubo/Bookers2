@@ -8,13 +8,12 @@ Rails.application.routes.draw do
   end
 
   # resources :users, only: [:show, :edit]
-  resources :books
   resources :users
   
   # ネスとしている
   # resourceの単数形はidがURLに含まれなくなる
   resources :books do
-    resource :favorite, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]
   end
   
